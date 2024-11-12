@@ -1,0 +1,2988 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Tangram Typography</title>
+    <style>
+
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.intro-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    z-index: 2000;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.star-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.meteor {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    opacity: 0;
+    transform-origin: right;
+    box-shadow: 
+        0 0 15px 3px rgba(255, 255, 255, 0.4),
+        0 0 30px 6px rgba(255, 255, 255, 0.2);
+}
+
+.star {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    background: white;
+}
+
+.intro-animation .tangram-intro-container .tangram-piece {
+    position: absolute;
+    opacity: 0;
+    transform-origin: center;
+    animation: scatterIn 0.5s ease forwards,
+               assembleShape 1s ease forwards 1.5s;
+}
+
+
+.tangram-intro-container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: containerAppear 0.5s ease forwards;
+}
+
+
+.intro-animation .tangram-piece {
+    position: absolute;
+    opacity: 0;
+    transform-origin: center;
+}
+
+
+@keyframes containerAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+.intro-animation .tangram-intro-container .large-triangle1 {
+    width: 150px;
+    height: 150px;
+    background: #3e8230;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    --final-x: 25px;
+    --final-y: -50px;
+    --final-rotation: 180deg;
+}
+
+
+.intro-animation .tangram-intro-container .large-triangle2 {
+    width: 150px;
+    height: 150px;
+    background: #D83B13;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    --final-x: -50px;
+    --final-y: 100px;
+    --final-rotation: 90deg;
+}
+
+
+.intro-animation .tangram-intro-container .parallelogram {
+    width: 106px;
+    height: 75px;
+    background: #1d3a83;
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    --final-x: 80px;
+    --final-y: 175px;
+    --final-rotation: 180deg;
+}
+
+
+.intro-animation .tangram-intro-container .medium-triangle {
+    width: 106px;
+    height: 106px;
+    background: #000080;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    --final-x: 100px;
+    --final-y: 60px;
+    --final-rotation: 360deg;
+}
+
+
+.intro-animation .tangram-intro-container .small-triangle1 {
+    width: 75px;
+    height: 75px;
+    background: #FF4500;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    --final-x: 175px;
+    --final-y: 175px;
+    --final-rotation: -180deg;
+}
+
+
+.intro-animation .tangram-intro-container .square {
+    width: 75px;
+    height: 75px;
+    background: #FFD700;
+    --final-x: 175px;
+    --final-y: 100px;
+    --final-rotation: -160deg;
+}
+
+
+.intro-animation .tangram-intro-container .small-triangle2 {
+    width: 75px;
+    height: 75px;
+    background: #8B4513;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    --final-x: 175px;
+    --final-y: -25px;
+    --final-rotation: -90deg;
+}
+
+@keyframes scatterIn {
+    0% {
+        opacity: 0;
+        transform: translate(var(--scatter-x), var(--scatter-y)) scale(0) rotate(var(--scatter-rotation));
+    }
+    100% {
+        opacity: 1;
+        transform: translate(var(--scatter-x), var(--scatter-y)) rotate(var(--scatter-rotation));
+    }
+}
+
+@keyframes assembleShape {
+    0% {
+        transform: translate(var(--scatter-x), var(--scatter-y)) rotate(var(--scatter-rotation));
+    }
+    100% {
+        transform: translate(var(--final-x), var(--final-y)) rotate(var(--final-rotation));
+    }
+}
+
+@keyframes containerAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+.triangle-piece {
+    width: 20px;
+    height: 20px;
+    background: #7FFF00;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    top: -10px;
+    left: 10px;
+    animation: rotatePiece 2s infinite alternate;
+}
+
+.square-piece {
+    width: 16px;
+    height: 16px;
+    background: #FCF340;
+    position: absolute;
+    left: 22px;
+    top: 5px;
+    animation: scalePiece 2s infinite alternate;
+}
+
+.parallelogram-piece {
+    width: 18px;
+    height: 12px;
+    background: #FB33DB;
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    left: 2px;
+    top: 15px;
+    animation: rotatePiece 2s infinite alternate-reverse;
+}
+
+
+@keyframes progressMove {
+    to { width: 100%; }
+}
+
+@keyframes moveWithProgress {
+    from { left: 0; }
+    to { left: calc(100% - 40px); }
+}
+
+@keyframes rotatePiece {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(45deg); }
+}
+
+@keyframes scalePiece {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 100% 0;
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        background-position: -100% 0;
+        filter: hue-rotate(360deg);
+    }
+}
+
+.intro-animation.fade-out {
+    opacity: 0;
+    transform: scale(1.1);
+    pointer-events: none;
+}
+
+
+.progress-container {
+    width: 400px;
+    height: 80px;
+    position: relative;
+}
+
+.page-container {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-container.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.progress-bar-bg {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    box-shadow: 
+        0 0 5px rgba(255,255,255,0.1),
+        inset 0 0 5px rgba(255,255,255,0.1);
+}
+
+.progress-bar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    transform: translateY(-50%);
+    background: linear-gradient(
+        90deg,
+        #7FFF00,
+        #FCF340,
+        #FB33DB,
+        #0310EA,
+        #7FFF00
+    );
+    background-size: 200% 100%;
+    animation: 
+        progressMove 2.5s linear forwards,
+        gradientShift 2.5s linear infinite;
+    box-shadow: 
+        0 0 10px rgba(127, 255, 0, 0.5),
+        0 0 20px rgba(251, 51, 219, 0.3);
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    filter: blur(4px);
+    opacity: 0.6;
+}
+
+.progress-tangram {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    animation: moveWithProgress 2.5s linear forwards;
+}
+
+.tangram-piece {
+    position: absolute;
+    transition: transform 0.3s ease;
+}
+
+.piece-1 {
+    width: 20px;
+    height: 20px;
+    background: #7FFF00;
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    top: -20px;
+    left: 10px;
+    animation: rotatePiece 2s infinite alternate;
+}
+
+.piece-2 {
+    width: 16px;
+    height: 16px;
+    background: #FCF340;
+    right: -10px;
+    animation: scalePiece 2s infinite alternate;
+}
+
+.piece-3 {
+    width: 18px;
+    height: 12px;
+    background: #FB33DB;
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    left: -10px;
+    bottom: -10px;
+    animation: rotatePiece 2s infinite alternate-reverse;
+}
+
+@keyframes imageAppear {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes progressMove {
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 100% 0;
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        background-position: -100% 0;
+        filter: hue-rotate(360deg);
+    }
+}
+
+@keyframes moveWithProgress {
+    from {
+        left: 0;
+    }
+    to {
+        left: calc(100% - 40px);
+    }
+}
+
+@keyframes rotatePiece {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(45deg);
+    }
+}
+
+@keyframes scalePiece {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.2);
+    }
+}
+
+        @font-face {
+            font-family: "TangramFont";
+            src: url("NewFontVF.ttf");
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            font-family: "Space Mono", monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .page-container {
+            height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    background: #000;
+    position: relative;
+    z-index: 1;
+    transform-origin: left center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+        .page-container.folded {
+     transform: translateX(-30%) rotateY(30deg) scale(0.95);
+}
+
+        .first-screen {
+            height: 100vh;
+            scroll-snap-align: start;
+        }
+
+        .split-layout,
+        .playful-section {
+            scroll-snap-align: start;
+            min-height: 100vh;
+        }
+
+        .split-layout {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tangram-section {
+            width: 50%;
+            height: 100vh;
+            position: relative;
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .type-section {
+            width: 50%;
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+
+        .tangram-section.expanded {
+            width: 70%;
+            transform: translateX(10%);
+        }
+
+        .type-section.expanded {
+            width: 70%;
+            transform: translateX(-10%);
+        }
+
+
+        .tangram-section.shrunk {
+            width: 30%;
+            transform: translateX(-10%);
+        }
+
+        .type-section.shrunk {
+            width: 30%;
+            transform: translateX(10%);
+        }
+
+        .blur-section {
+            filter: blur(10px);
+            opacity: 0.7;
+            transform: scale(0.95);
+        }
+
+        .grid-system {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .grid-system::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+            background-size: 100px 100px;
+        }
+
+        .grid-system::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .grid-labels {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .h-labels,
+        .v-labels {
+            position: absolute;
+        }
+
+        .h-labels {
+            top: 10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+        }
+
+        .v-labels {
+            left: 10px;
+            top: 0;
+            height: 100%;
+            width: 20px;
+        }
+
+        .grid-label {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 10px;
+            font-family: "Space Mono", monospace;
+        }
+
+        .h-labels .grid-label {
+            transform: translateX(-50%);
+        }
+
+        .v-labels .grid-label {
+            transform: translateY(-50%);
+            left: 10px;
+        }
+
+        .tangram-container {
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            pointer-events: none;
+        }
+
+        .piece-wrapper {
+            position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 0.05s linear;
+    touch-action: none;
+    user-select: none;
+        }
+
+        .piece-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            bottom: -5px;
+            left: -5px;
+            background: inherit;
+            filter: blur(15px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .piece {
+            position: relative;
+            cursor: grab;
+            transform-origin: center;
+    will-change: transform;
+    transition: all 0.05s linear;
+    pointer-events: auto;
+        }
+
+        .piece-wrapper:hover .piece {
+            transform: scale(1.05) translateZ(20px);
+            filter: brightness(1.2) drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+        }
+
+        .piece-wrapper:hover {
+    z-index: 100;
+}
+
+        .piece-wrapper:hover::before {
+            opacity: 0.5;
+        }
+
+        .piece-wrapper.dragging {
+            z-index: 1000;
+        }
+
+        .piece-wrapper.dragging .piece {
+            cursor: grabbing;
+    transform: scale(1.02);
+    filter: brightness(1.1);
+        }
+
+        .piece-wrapper.dragging::before {
+            opacity: 0.7;
+        }
+
+        .rotation-handle {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 100;
+            pointer-events: auto;
+        }
+
+        .rotation-handle:hover {
+            background: white;
+            transform: translateX(-50%) scale(1.4);
+        }
+
+        .large-triangle1,
+        .large-triangle2 {
+            width: 200px;
+            height: 200px;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        }
+
+        .large-triangle1 {
+            background: #7FFF00;
+        }
+
+        .large-triangle2 {
+            background: #FCF340;
+        }
+
+        .medium-triangle {
+            width: 141.4px;
+            height: 141.4px;
+            background: #FB33DB;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        }
+
+        .small-triangle1,
+        .small-triangle2 {
+            width: 100px;
+            height: 100px;
+            background: #0310EA;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        }
+
+        .square {
+            width: 70.7px;
+            height: 70.7px;
+            background: #FB33DB;
+        }
+
+        .parallelogram {
+            width: 100px;
+            height: 70.7px;
+            background: #FCF340;
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        }
+
+        .type-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            z-index: 1;
+        }
+
+        .tangram-container,
+        .type-container {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .editable-text {
+            width: 100%;
+            max-width: 600px;
+            min-height: 60px;
+            max-height: 200px;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: inherit;
+            font-size: 1.2rem;
+            outline: none;
+            resize: none;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .editable-text:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .animated-text {
+            font-family: "TangramFont", sans-serif;
+            font-size: clamp(4rem, 10vw, 8rem);
+            text-align: center;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .controls-panel {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            background: rgba(255, 255, 255, 0.05);
+            z-index: 100;
+        }
+
+        .control-button {
+            padding: 1rem;
+            width: 160px;
+            background: #000;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .control-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .control-button.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .value-display {
+            padding: 1rem;
+            background: #000;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .h-labels .grid-label:nth-child(1) {
+            left: 0;
+        }
+
+        .h-labels .grid-label:nth-child(2) {
+            left: 100px;
+        }
+
+        .h-labels .grid-label:nth-child(3) {
+            left: 200px;
+        }
+
+        .h-labels .grid-label:nth-child(4) {
+            left: 300px;
+        }
+
+        .h-labels .grid-label:nth-child(5) {
+            left: 400px;
+        }
+
+        .h-labels .grid-label:nth-child(6) {
+            left: 500px;
+        }
+
+        .h-labels .grid-label:nth-child(7) {
+            left: 600px;
+        }
+
+        .v-labels .grid-label:nth-child(1) {
+            top: 0;
+        }
+
+        .v-labels .grid-label:nth-child(2) {
+            top: 100px;
+        }
+
+        .v-labels .grid-label:nth-child(3) {
+            top: 200px;
+        }
+
+        .v-labels .grid-label:nth-child(4) {
+            top: 300px;
+        }
+
+        .v-labels .grid-label:nth-child(5) {
+            top: 400px;
+        }
+
+        .v-labels .grid-label:nth-child(6) {
+            top: 500px;
+        }
+
+        .v-labels .grid-label:nth-child(7) {
+            top: 600px;
+        }
+
+        @media (max-width: 768px) {
+            .split-layout {
+                flex-direction: column;
+            }
+
+            .tangram-section,
+            .type-section {
+                width: 100%;
+                height: 50vh;
+            }
+
+            .controls-panel {
+                right: 2rem;
+                left: auto;
+            }
+
+            .type-container {
+                padding: 1rem;
+            }
+
+            .animated-text {
+                font-size: clamp(3rem, 8vw, 6rem);
+            }
+        }
+
+        .info-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transform: translateY(100%);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2000;
+    overflow-y: auto;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.info-panel.open {
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.info-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2001;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.info-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.info-toggle:active {
+    transform: translateY(1px);
+}
+
+.info-content {
+    position: relative;
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: white;
+}
+
+.info-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.info-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.toggle-icon,
+.close-icon {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.toggle-icon::before {
+    content: "i";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-family: serif;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.close-icon::before,
+.close-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background: white;
+}
+
+.close-icon::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close-icon::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    .info-content {
+        padding: 4rem 1.5rem;
+    }
+    
+    .info-toggle {
+        bottom: 16px;
+        right: 16px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .info-close {
+        top: 16px;
+        right: 16px;
+    }
+}
+
+.info-panel {
+    touch-action: pan-y pinch-zoom;
+}
+
+.info-content {
+    -webkit-overflow-scrolling: touch;
+}
+
+        .info-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            max-width: 800px;
+            padding: 4rem;
+            color: white;
+        }
+
+        .info-section {
+            margin-bottom: 2rem;
+        }
+
+        .info-section h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .info-section h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .info-section p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .toggle-icon {
+            width: 20px;
+            height: 2px;
+            background: white;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-icon::before,
+        .toggle-icon::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: white;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-icon::before {
+            transform: translateY(-6px);
+        }
+
+        .toggle-icon::after {
+            transform: translateY(6px);
+        }
+
+        .info-panel.open .toggle-icon {
+            background: transparent;
+        }
+
+        .info-panel.open .toggle-icon::before {
+            transform: rotate(45deg);
+        }
+
+        .info-panel.open .toggle-icon::after {
+            transform: rotate(-45deg);
+        }
+
+        @media (max-width: 768px) {
+            .info-content {
+                padding: 2rem;
+            }
+
+            .info-toggle {
+                right: 20px;
+            }
+        }
+
+        .playful-section {
+            background: #FFFFFF;
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1rem;
+            overflow: hidden;
+        }
+
+        .playful-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .playful-title {
+            font-size: clamp(4rem, 8vw, 6rem);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            color: #FF6B6B;
+        }
+
+        .playful-title::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: rgba(255, 230, 102, 0.2);
+            z-index: -1;
+        }
+
+        .decoration-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .tangram-shape {
+            animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center;
+        }
+
+        .tangram-shape.triangle-1 {
+            width: 120px;
+            height: 120px;
+            top: 15%;
+            right: 15%;
+            background: #7FFF00;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            animation:
+                float 8s infinite,
+                rotateAndMorph 12s infinite,
+                colorShift 15s infinite;
+        }
+
+        .tangram-shape.triangle-2 {
+            width: 80px;
+            height: 80px;
+            bottom: 25%;
+            left: 60%;
+            background: #FB33DB;
+            clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+            animation:
+                float 6s infinite reverse,
+                zigzagMove 10s infinite,
+                colorShift 12s infinite reverse;
+        }
+
+
+        .tangram-shape.square-1 {
+            width: 90px;
+            height: 90px;
+            top: 40%;
+            left: 80%;
+            background: #0310EA;
+            animation:
+                float 10s infinite,
+                diagonalDance 15s infinite,
+                colorShift 8s infinite;
+        }
+
+        .tangram-shape.square-2 {
+            width: 70px;
+            height: 70px;
+            bottom: 30%;
+            right: 20%;
+            background: #FB33DB;
+            animation:
+                float 8s infinite reverse,
+                spiralMove 12s infinite,
+                colorShift 10s infinite reverse;
+        }
+
+        @keyframes rotateAndMorph {
+
+            0%,
+            100% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: rotate(90deg) scale(1.1);
+            }
+
+            50% {
+                transform: rotate(180deg) scale(1);
+            }
+
+            75% {
+                transform: rotate(270deg) scale(0.9);
+            }
+        }
+
+        @keyframes zigzagMove {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(20px, -20px) rotate(45deg);
+            }
+
+            50% {
+                transform: translate(0, -40px) rotate(0deg);
+            }
+
+            75% {
+                transform: translate(-20px, -20px) rotate(-45deg);
+            }
+        }
+
+        @keyframes diagonalDance {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -30px) rotate(120deg) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-30px, -30px) rotate(240deg) scale(0.9);
+            }
+        }
+
+        @keyframes spiralMove {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: translate(20px, -20px) rotate(90deg) scale(1.1);
+            }
+
+            50% {
+                transform: translate(0, -40px) rotate(180deg) scale(1);
+            }
+
+            75% {
+                transform: translate(-20px, -20px) rotate(270deg) scale(0.9);
+            }
+        }
+
+        @keyframes colorShift {
+
+            0%,
+            100% {
+                filter: hue-rotate(0deg) brightness(1);
+            }
+
+            50% {
+                filter: hue-rotate(180deg) brightness(1.2);
+            }
+        }
+
+        .playful-grid {
+            grid-column: 2 / 12;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .playful-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 4px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .playful-card:hover {
+            transform:
+                translateY(-15px) rotateX(10deg) rotateY(10deg) scale(1.05);
+            box-shadow:
+                20px 20px 60px rgba(0, 0, 0, 0.1),
+                -20px -20px 60px rgba(255, 255, 255, 0.8);
+        }
+
+        .playful-card:hover .card-shape {
+            animation: shapeTransform 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes shapeTransform {
+            0% {
+                transform: scale(1) rotate(0deg);
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                transform: scale(1.1) rotate(10deg);
+                filter: hue-rotate(90deg);
+            }
+        }
+
+        .card-shape {
+            height: 160px;
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .card-decoration {
+            animation: decorationFloat 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes decorationFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+        }
+
+        .playful-card:nth-child(1) .card-shape {
+            background:
+                linear-gradient(45deg, #7FFF00 25%, transparent 25%),
+                linear-gradient(-45deg, #FCF340 25%, transparent 25%);
+            background-size: 50% 50%;
+        }
+
+        .playful-card:nth-child(2) .card-shape {
+            background: none;
+            position: relative;
+        }
+
+        .playful-card:nth-child(2) .shape1,
+        .playful-card:nth-child(2) .shape2 {
+            position: absolute;
+            width: 140px;
+            height: 80px;
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+            transition: all 0.3s ease;
+        }
+
+        .playful-card:nth-child(2) .shape1 {
+            top: 50%;
+            left: 20%;
+            background: #FB33DB;
+            transform: translateY(-50%) rotate(-15deg);
+            animation: parallelShift1 4s ease-in-out infinite;
+        }
+
+        .playful-card:nth-child(2) .shape2 {
+            top: 50%;
+            right: 20%;
+            background: #0310EA;
+            transform: translateY(-50%) rotate(15deg);
+            animation: parallelShift2 4s ease-in-out infinite;
+        }
+
+        .playful-card:nth-child(3) .card-shape {
+            background:
+                linear-gradient(30deg, #FCF340 50%, transparent 50%),
+                linear-gradient(-30deg, #7FFF00 30%, transparent 30%);
+        }
+
+
+        .playful-title {
+            grid-column: 2 / 12;
+            font-size: clamp(3rem, 5vw, 4rem);
+            color: #333;
+            position: relative;
+            margin-bottom: 1rem;
+            text-align: center;
+            animation: titlePulse 4s infinite alternate ease-in-out;
+        }
+
+        @keyframes titlePulse {
+            0% {
+                transform: scale(1);
+                filter: hue-rotate(0deg);
+            }
+
+            50% {
+                transform: scale(1.05);
+                filter: hue-rotate(180deg);
+            }
+
+            100% {
+                transform: scale(1);
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        .playful-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #FF6B6B;
+        }
+
+        .card-content h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .card-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: currentColor;
+            transition: width 0.5s ease;
+        }
+
+        .playful-card:hover .card-content h3::after {
+            width: 100%;
+        }
+
+
+        .card-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .playful-section {
+                padding: 1rem;
+            }
+
+            .playful-grid {
+                grid-column: 1 / -1;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .playful-title {
+                grid-column: 1 / -1;
+                font-size: clamp(2rem, 4vw, 3rem);
+            }
+        }
+
+        .tangram-shape.parallelogram-1 {
+            width: 110px;
+            height: 70px;
+            top: 35%;
+            right: 25%;
+            background: #FCF340;
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+            animation:
+                parallelogramDance 10s infinite cubic-bezier(0.4, 0, 0.2, 1),
+                parallelogramMorph 8s infinite alternate ease-in-out,
+                colorShift 12s infinite;
+        }
+
+        .tangram-shape.parallelogram-2 {
+            width: 90px;
+            height: 60px;
+            bottom: 20%;
+            left: 25%;
+            background: #FB33DB;
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+            animation:
+                parallelogramSlide 12s infinite cubic-bezier(0.4, 0, 0.2, 1),
+                parallelogramFlip 6s infinite alternate ease-in-out,
+                colorShift 10s infinite reverse;
+        }
+
+        @keyframes parallelogramDance {
+            0% {
+                transform: translate(0, 0) skew(0deg) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(20px, -15px) skew(-15deg) rotate(15deg);
+            }
+
+            50% {
+                transform: translate(0, -30px) skew(0deg) rotate(0deg);
+            }
+
+            75% {
+                transform: translate(-20px, -15px) skew(15deg) rotate(-15deg);
+            }
+
+            100% {
+                transform: translate(0, 0) skew(0deg) rotate(0deg);
+            }
+        }
+
+        @keyframes parallelogramMorph {
+            0% {
+                clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+            }
+
+            50% {
+                clip-path: polygon(0% 0%, 75% 0%, 100% 100%, 25% 100%);
+            }
+
+            100% {
+                clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+            }
+        }
+
+        @keyframes parallelogramSlide {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, 20px) rotate(120deg) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-30px, -20px) rotate(240deg) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(360deg) scale(1);
+            }
+        }
+
+        @keyframes parallelogramFlip {
+            0% {
+                transform: rotateY(0deg) skew(0deg);
+            }
+
+            50% {
+                transform: rotateY(180deg) skew(15deg);
+            }
+
+            100% {
+                transform: rotateY(360deg) skew(0deg);
+            }
+        }
+
+        .main-wrapper {
+    position: relative;
+    perspective: 1200px;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.page-container {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    background: #000;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.first-screen,
+.playful-section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+}
+
+
+.features-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #000;
+    transform-origin: right center;
+    transform: translateX(100%) rotateY(-90deg);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    z-index: 1500;
+    visibility: hidden;
+}
+
+.features-container.active {
+    transform: translateX(0) rotateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.feature-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+}
+
+.feature-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    padding: 2rem;
+}
+
+.section-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+
+.section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+
+.workspace {
+    display: flex;
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+
+.workspace-tools {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.workspace-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.canvas-container {
+    width: 100%;
+    aspect-ratio: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.section-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.feature-section.active {
+    display: block;
+}
+
+.back-btn {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    padding: 1rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 2000;
+}
+
+.features-container.active .back-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.workspace-story {
+    position: relative;
+    width: 100%;
+    padding: 2rem;
+}
+
+.workspace-story::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(127, 255, 0, 0.1),
+        rgba(251, 51, 219, 0.1),
+        transparent 60%
+    );
+    filter: blur(20px);
+    opacity: 0.5;
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+
+#story-text {
+    font-family: "NewFontVF", sans-serif;
+    font-variation-settings: "xopq" 0, "SHAP" 0;
+    font-size: 50px;
+    line-height: 1.6;
+    transition: all 0.5s ease;
+    width: 100%;
+    min-height: 200px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    color: white;
+    outline: none;
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 0 30px rgba(127, 255, 0, 0.1),
+        0 0 60px rgba(251, 51, 219, 0.05);
+
+    display: block;
+    word-break: break-all;
+    white-space: normal;
+    overflow: auto;
+}
+
+#story-text:focus {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 
+        0 0 40px rgba(127, 255, 0, 0.15),
+        0 0 80px rgba(251, 51, 219, 0.1);
+}
+
+
+
+
+
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="intro-animation">
+
+        <div class="tangram-intro-container">
+
+            <div class="tangram-piece large-triangle1"></div>
+
+            <div class="tangram-piece large-triangle2"></div>
+
+            <div class="tangram-piece parallelogram"></div>
+
+            <div class="tangram-piece medium-triangle"></div>
+
+            <div class="tangram-piece small-triangle1"></div>
+
+            <div class="tangram-piece square"></div>
+
+            <div class="tangram-piece small-triangle2"></div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar-bg"></div>
+            <div class="progress-bar"></div>
+            <div class="progress-tangram">
+                <div class="progress-piece triangle-piece"></div>
+                <div class="progress-piece square-piece"></div>
+                <div class="progress-piece parallelogram-piece"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-wrapper">
+        
+
+        <div class="page-container">
+            <div class="info-toggle">
+                <div class="toggle-icon"></div>
+            </div>
+            
+            <div class="info-panel">
+                <div class="info-content">
+                    <button class="info-close">
+                        <div class="close-icon"></div>
+                    </button>
+                    <div class="info-section">
+                        <h2>SPECIMEN</h2>
+                        <h3>About this typeface</h3>
+                        <p>DO YOU STILL REMEMBER THE GAME FROM YOUR CHILDHOOD? Tangram — a puzzle full of childlike wonder, where simple geometric shapes come alive in endless combinations. This tangram-inspired typeface captures that same innocence and curiosity, turning each letter into a playful composition of triangles, squares, and parallelograms. It invites viewers back to a time when creativity felt boundless and imagination could transform basic shapes into anything. Through this font, I aim to bring out the purity and joy of childhood memories, blending simplicity with the limitless potential of playful design.</p>
+                    </div>
+                    <div class="info-section">
+                        <h3>Features</h3>
+                        <p>This tangram-inspired typeface features a **monospace design**, with each letter crafted to occupy an identical amount of space, creating a structured. The rigid, modular shapes bring a sense of childhood nostalgia while balancing the precision of a monospaced font, inviting creativity within a familiar framework.</p>
+                    </div>
+                    <div class="info-section">
+                        <h3>Usage</h3>
+                        <p>Use it as a fun and versatile tool to add a sense of playfulness to your designs. This tangram-inspired, monospaced typeface is perfect for projects that aim to evoke nostalgia, creativity, or a retro-modern aesthetic. Whether you're designing for children’s products, tech-inspired themes, or educational materials, this font brings a unique touch that balances structure with whimsy. </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="first-screen">
+                <div class="split-layout">
+                    <section class="tangram-section">
+                        <div class="grid-system">
+                            <div class="grid-labels">
+                                <div class="h-labels">
+                                    <span class="grid-label">0cm</span>
+                                    <span class="grid-label">10cm</span>
+                                    <span class="grid-label">20cm</span>
+                                    <span class="grid-label">30cm</span>
+                                    <span class="grid-label">40cm</span>
+                                    <span class="grid-label">50cm</span>
+                                    <span class="grid-label">60cm</span>
+                                </div>
+                                <div class="v-labels">
+                                    <span class="grid-label">0cm</span>
+                                    <span class="grid-label">10cm</span>
+                                    <span class="grid-label">20cm</span>
+                                    <span class="grid-label">30cm</span>
+                                    <span class="grid-label">40cm</span>
+                                    <span class="grid-label">50cm</span>
+                                    <span class="grid-label">60cm</span>
+                                </div>
+                            </div>
+                        </div>
+
+  <div class="tangram-container">
+        <div class="piece-wrapper" style="left: 150px; top: 150px;">
+            <div class="piece large-triangle1"></div>
+            <div class="rotation-handle"></div>
+        </div>
+        <div class="piece-wrapper" style="right: 150px; top: 150px;">
+            <div class="piece large-triangle2"></div>
+            <div class="rotation-handle"></div>
+        </div>
+        <div class="piece-wrapper" style="left: 150px; bottom: 150px;">
+            <div class="piece medium-triangle"></div>
+            <div class="rotation-handle"></div>
+        </div>
+        <div class="piece-wrapper" style="left: 100px; top: 200px;">
+            <div class="piece small-triangle1"></div>
+            <div class="rotation-handle"></div>
+        </div>
+        <div class="piece-wrapper" style="right: 100px; bottom: 100px;">
+            <div class="piece small-triangle2"></div>
+            <div class="rotation-handle"></div>
+        </div>
+        <div class="piece-wrapper" style="left: 215px; top: 215px;">
+            <div class="piece square"></div>
+            <div class="rotation-handle"></div>
+        </div>
+        <div class="piece-wrapper" style="right: 150px; top: 250px;">
+            <div class="piece parallelogram"></div>
+            <div class="rotation-handle"></div>
+        </div>
+    </div>
+                    </section>
+
+                    <section class="type-section">
+                        <div class="controls-panel">
+                            <button class="control-button active" data-mode="thickOnly">Thickness</button>
+                            <button class="control-button" data-mode="bothAxes">Both Axes</button>
+                            <button class="control-button" data-mode="pause">Pause</button>
+                        </div>
+
+                        <div class="type-container">
+                            <p class="editable-text" contenteditable="plaintext-only">Type here</p>
+                            <div class="animated-text" id="mainText">TANGRAM</div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+
+            <section class="playful-section">
+                <div class="decoration-elements">
+                    <div class="tangram-shape triangle-1"></div>
+                    <div class="tangram-shape triangle-2"></div>
+                    <div class="tangram-shape parallelogram-1"></div>
+                    <div class="tangram-shape parallelogram-2"></div>
+                    <div class="tangram-shape square-1"></div>
+                    <div class="tangram-shape square-2"></div>
+                </div>
+
+                <h2 class="playful-title">
+                    Let's Play!
+                    <div class="title-decoration"></div>
+                </h2>
+
+                <div class="playful-grid">
+                    <div class="playful-card" data-section="story">
+                        <div class="card-content">
+                            <h3>Make A Story</h3>
+                            <p>Transform shapes into characters and create your own narrative.</p>
+                            <div class="card-shape">
+                                <div class="shape-animation"></div>
+                            </div>
+                        </div>
+                        <div class="card-decoration"></div>
+                    </div>
+
+                    <div class="playful-card" data-section="animal">
+                        <div class="card-content">
+                            <h3>Build Animals</h3>
+                            <p>Combine pieces to create your favorite animals.</p>
+                            <div class="card-shape">
+                                <div class="shape1"></div>
+                                <div class="shape2"></div>
+                            </div>
+                        </div>
+                        <div class="card-decoration"></div>
+                    </div>
+
+                    <div class="playful-card" data-section="letter">
+                        <div class="card-content">
+                            <h3>Create Letters</h3>
+                            <p>Design your own typographic experiments.</p>
+                            <div class="card-shape">
+                                <div class="shape-animation"></div>
+                            </div>
+                        </div>
+                        <div class="card-decoration"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="features-container">
+            <button class="back-btn">←</button>
+
+
+            <section class="feature-section story-section">
+                <div class="letter-container">
+                    
+                    <div class="section-content">
+                        <div class="workspace">
+                            <div class="workspace-main">
+
+                                <div class="grid-system">
+                                    <div class="grid-labels">
+                                        <div class="h-labels">
+                                            <span class="grid-label">0cm</span>
+                                            <span class="grid-label">10cm</span>
+                                            <span class="grid-label">20cm</span>
+                                            <span class="grid-label">30cm</span>
+                                            <span class="grid-label">40cm</span>
+                                            <span class="grid-label">50cm</span>
+                                            <span class="grid-label">60cm</span>
+                                        </div>
+                                        <div class="v-labels">
+                                            <span class="grid-label">0cm</span>
+                                            <span class="grid-label">10cm</span>
+                                            <span class="grid-label">20cm</span>
+                                            <span class="grid-label">30cm</span>
+                                            <span class="grid-label">40cm</span>
+                                            <span class="grid-label">50cm</span>
+                                            <span class="grid-label">60cm</span>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div class="workspace-story">
+
+                                    <div class="dreamy-background">
+                                        <div class="floating-pieces">
+
+                                            <div class="story-piece p1"></div>
+                                            <div class="story-piece p2"></div>
+                                            <div class="story-piece p3"></div>
+                                            <div class="story-piece p4"></div>
+                                            <div class="story-piece p5"></div>
+                                        </div>
+                                        <div class="dream-glow"></div>
+                                    </div>
+                                    
+                                    <style>
+                                        @font-face {
+                                            font-family: "NewFontVF";
+                                            src: url("NewFontVF.ttf");
+                                        }
+                                        .story-section {
+            margin: 0;
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            background: #000;
+        }
+
+        .letter-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+}
+
+        .workspace-story {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        #story-text {
+            font-family: "NewFontVF", sans-serif;
+            font-variation-settings: "xopq" 0, "SHAP" 0;
+            font-size: 50px;
+            transition: font-variation-settings .5s;
+            width: 100%;
+            min-height: 200px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            color: white;
+            outline: none;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 30px rgba(127, 255, 0, 0.1),
+                0 0 60px rgba(251, 51, 219, 0.05);
+            transition: font-variation-settings .5s;
+            
+        }
+
+
+
+        @media (max-width: 768px) {
+            .story-container {
+                padding: 1rem;
+            }
+
+            #story-text {
+                font-size: 40px;
+                padding: 1.5rem;
+            }
+        }
+                                    </style>
+                                
+                                    <p id="story-text" contenteditable="plaintext-only">SHARE YOUR STORIES HERE</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+
+            <section class="feature-section animal-section">
+                <style>
+
+                    
+                    :root {
+                        --xopq: 0;
+                        --shap: 0;
+                    }
+            
+                    .animal-section {
+                        margin: 0;
+                        width: 100%;
+                        height: 100vh;
+                        position: relative;
+                    }
+
+                    .workspace-animal {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    z-index: 1;
+}
+            
+                    .animal-container {
+                        width: 100vw;
+                        height: 100vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        padding: 2rem;
+                    }
+            
+                    /* 网格背景 */
+                    .grid-system {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        pointer-events: none;
+                    }
+            
+                    .grid-system::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-image:
+                            linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                            linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+                        background-size: 100px 100px;
+                    }
+            
+                    .grid-system::after {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-image:
+                            linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                            linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+                        background-size: 50px 50px;
+                    }
+            
+                    #animal-text {
+                        width: 100%;
+    max-width: 800px;
+    min-height: 200px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    color: white;
+    outline: none;
+    backdrop-filter: blur(10px);
+    box-shadow: 
+        0 0 30px rgba(127, 255, 0, 0.1),
+        0 0 60px rgba(251, 51, 219, 0.05);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-content: flex-start;
+                    }
+            
+                    #animal-text:focus {
+                        background: rgba(255, 255, 255, 0.08);
+    box-shadow: 
+        0 0 40px rgba(127, 255, 0, 0.15),
+        0 0 80px rgba(251, 51, 219, 0.1);
+                    }
+            
+                    .grid-labels {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        pointer-events: none;
+                    }
+            
+                    .grid-label {
+                        position: absolute;
+                        color: rgba(255, 255, 255, 0.4);
+                        font-size: 10px;
+                        font-family: "Space Mono", monospace;
+                    }
+            
+                    .h-labels .grid-label {
+                        transform: translateX(-50%);
+                    }
+            
+                    .v-labels .grid-label {
+                        transform: translateY(-50%);
+                        left: 10px;
+                    }
+
+
+                    .workspace-animal {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    z-index: 1;
+}
+
+
+.character {
+    font-family: "NewFontVF", sans-serif;
+    font-variation-settings: "xopq" var(--xopq), "SHAP" var(--shap);
+    font-size: 50px;
+    display: inline-block;
+    padding: 2px;
+    transform-origin: center;
+    transition: transform 0.3s ease;
+    cursor: text;
+    position: relative;
+    animation: float 3s infinite ease-in-out;
+    animation-delay: calc(var(--char-index) * 0.1s);
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(var(--x), var(--y)) rotate(var(--rotation));
+    }
+    50% {
+        transform: translate(var(--x), calc(var(--y) - 5px)) rotate(var(--rotation));
+    }
+}
+
+                </style>
+            
+                <div class="animal-container" onmousemove="setAnimalAxes(event)">
+                    <div class="grid-system">
+                        <div class="grid-labels">
+                            <div class="h-labels">
+                                <span class="grid-label">0cm</span>
+                                <span class="grid-label">10cm</span>
+                                <span class="grid-label">20cm</span>
+                                <span class="grid-label">30cm</span>
+                                <span class="grid-label">40cm</span>
+                                <span class="grid-label">50cm</span>
+                                <span class="grid-label">60cm</span>
+                            </div>
+                            <div class="v-labels">
+                                <span class="grid-label">0cm</span>
+                                <span class="grid-label">10cm</span>
+                                <span class="grid-label">20cm</span>
+                                <span class="grid-label">30cm</span>
+                                <span class="grid-label">40cm</span>
+                                <span class="grid-label">50cm</span>
+                                <span class="grid-label">60cm</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workspace-animal">
+                        <div id="animal-text" contenteditable="true" spellcheck="false"></div>
+                    </div>
+                </div>
+            </section>
+
+                <section class="feature-section letter-section">
+                    <style>
+                        .letter-section {
+                            margin: 0;
+                            width: 100%;
+                            height: 100vh;
+                            position: relative;
+                            background: #000;
+                        }
+                
+                        .letter-container {
+                            width: 100vw;
+                            height: 100vh;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            position: relative;
+                            padding: 2rem;
+                        }
+                
+                        .grid-system {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            pointer-events: none;
+                        }
+                
+                        .grid-system::before {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-image:
+                                linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                                linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+                            background-size: 100px 100px;
+                        }
+                
+                        .grid-system::after {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-image:
+                                linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                                linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+                            background-size: 50px 50px;
+                        }
+                
+                        .grid-labels {
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            pointer-events: none;
+                        }
+                
+                        .grid-label {
+                            position: absolute;
+                            color: rgba(255, 255, 255, 0.4);
+                            font-size: 10px;
+                            font-family: "Space Mono", monospace;
+                        }
+                
+                        .h-labels .grid-label {
+                            transform: translateX(-50%);
+                        }
+                
+                        .v-labels .grid-label {
+                            transform: translateY(-50%);
+                            left: 10px;
+                        }
+                
+                        .workspace-letter {
+                            position: relative;
+                            width: 90%;
+                            max-width: 800px;
+                            z-index: 1;
+                        }
+                
+                        #letter-text {
+                            font-family: "NewFontVF", sans-serif;
+                            font-variation-settings: "xopq" 0;
+                            font-size: 64px;
+                            line-height: .75em;
+                            word-break: break-all;
+                            width: 100%;
+                            min-height: 200px;
+                            padding: 2rem;
+                            background: rgba(255, 255, 255, 0.05);
+                            border: 1px solid rgba(255, 255, 255, 0.1);
+                            border-radius: 15px;
+                            color: white;
+                            outline: none;
+                            backdrop-filter: blur(10px);
+                            box-shadow: 
+                                0 0 30px rgba(127, 255, 0, 0.1),
+                                0 0 60px rgba(251, 51, 219, 0.05);
+                        }
+    
+                        #letter-text span {
+                            transition: font-variation-settings 5s, opacity 5s;
+                            display: inline-block;
+                        }
+    
+                        #letter-text span:hover {
+                            opacity: .25;
+                            font-variation-settings: "xopq" 100;
+                            transition: font-variation-settings 0s, opacity 0s;
+                        }
+                    </style>
+                
+                    <div class="letter-container">
+                        <div class="grid-system">
+                            <div class="grid-labels">
+                                <div class="h-labels">
+                                    <span class="grid-label">0cm</span>
+                                    <span class="grid-label">10cm</span>
+                                    <span class="grid-label">20cm</span>
+                                    <span class="grid-label">30cm</span>
+                                    <span class="grid-label">40cm</span>
+                                    <span class="grid-label">50cm</span>
+                                    <span class="grid-label">60cm</span>
+                                </div>
+                                <div class="v-labels">
+                                    <span class="grid-label">0cm</span>
+                                    <span class="grid-label">10cm</span>
+                                    <span class="grid-label">20cm</span>
+                                    <span class="grid-label">30cm</span>
+                                    <span class="grid-label">40cm</span>
+                                    <span class="grid-label">50cm</span>
+                                    <span class="grid-label">60cm</span>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="workspace-letter">
+                            <div id="letter-text">
+                                <span>MOVE</span><span>TO</span><span>CREATE</span><span>LETTERS</span>
+                                <span>MOVE</span><span>TO</span><span>CREATE</span><span>LETTERS</span>
+                                <span>MOVE</span><span>TO</span><span>CREATE</span><span>LETTERS</span>
+                                <span>MOVE</span><span>TO</span><span>CREATE</span><span>LETTERS</span>
+                                <span>MOVE</span><span>TO</span><span>CREATE</span><span>LETTERS</span>
+                                <span>MOVE</span><span>TO</span><span>CREATE</span><span>LETTERS</span>
+                                <span>MOVE</span><span>TO</span><span>CREATE</span><span>LETTERS</span>
+                                <span>MOVE</span><span>TO</span><span>CREATE</span><span>LETTERS</span>
+                                <span>MOVE</span><span>TO</span><span>CREATE</span><span>LETTERS</span>
+                                <span>MOVE</span><span>TO</span><span>CREATE</span><span>LETTERS</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+        </div>
+    </div>
+
+    <script>
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. 所有变量声明放在最前面
+    var root = document.querySelector(':root');
+    var animalText = document.getElementById('animal-text');
+    var storyArea = document.querySelector('.workspace-story');
+    var text = document.querySelector('#story-text');
+    var storyElement = document.querySelector('#story-text');
+    var introAnimation = document.querySelector('.intro-animation');
+    var pageContainer = document.querySelector('.page-container');
+    var infoPanel = document.querySelector('.info-panel');
+    var infoToggle = document.querySelector('.info-toggle');
+    var closeButton = document.querySelector('.info-close');
+    var mainText = document.getElementById('mainText');
+    var editableText = document.querySelector('.editable-text');
+    var controls = document.querySelectorAll('.control-button');
+    var featuresContainer = document.querySelector('.features-container');
+    var backBtn = document.querySelector('.back-btn');
+    var playfulCards = document.querySelectorAll('.playful-card');
+    var touchStartY = 0;
+    var touchEndY = 0;
+    var currentMode = 'thickOnly';
+    var animationFrame;
+    var startTime = null;
+    var isPaused = false;
+    var scrollPosition = 0;
+    var pieceWrappers = document.querySelectorAll('.piece-wrapper');
+var selectedPiece = null;
+var initialMouseX = 0;
+var initialMouseY = 0;
+var initialPieceX = 0;
+var initialPieceY = 0;
+
+const tangramSection = document.querySelector('.tangram-section');
+const typeSection = document.querySelector('.type-section');
+
+tangramSection.addEventListener('mouseenter', () => {
+    tangramSection.classList.add('expanded');
+    typeSection.classList.add('shrunk');
+    typeSection.classList.add('blur-section');
+});
+
+tangramSection.addEventListener('mouseleave', () => {
+    tangramSection.classList.remove('expanded');
+    typeSection.classList.remove('shrunk');
+    typeSection.classList.remove('blur-section');
+});
+
+typeSection.addEventListener('mouseenter', () => {
+    typeSection.classList.add('expanded');
+    tangramSection.classList.add('shrunk');
+    tangramSection.classList.add('blur-section');
+});
+
+typeSection.addEventListener('mouseleave', () => {
+    typeSection.classList.remove('expanded');
+    tangramSection.classList.remove('shrunk');
+    tangramSection.classList.remove('blur-section');
+});
+
+pieceWrappers.forEach(function(wrapper) {
+    wrapper.addEventListener('mousedown', startDragging);
+    var handle = wrapper.querySelector('.rotation-handle');
+    if (handle) {
+        handle.addEventListener('mousedown', startRotating);
+    }
+});
+
+document.addEventListener('mousemove', drag);
+document.addEventListener('mouseup', stopDragging);
+
+function startDragging(e) {
+    if (e.target.classList.contains('rotation-handle')) {
+        return;
+    }
+    selectedPiece = this;
+    selectedPiece.classList.add('dragging');
+    
+    // 记录鼠标初始位置
+    initialMouseX = e.clientX;
+    initialMouseY = e.clientY;
+    
+    // 记录图形初始位置
+    var computedStyle = window.getComputedStyle(selectedPiece);
+    initialPieceX = parseInt(computedStyle.left, 10) || 0;
+    initialPieceY = parseInt(computedStyle.top, 10) || 0;
+    
+    selectedPiece.style.zIndex = '1000';
+}
+
+function drag(e) {
+    if (selectedPiece) {
+        e.preventDefault();
+        
+        // 计算位移
+        var dx = e.clientX - initialMouseX;
+        var dy = e.clientY - initialMouseY;
+        
+        // 更新位置
+        selectedPiece.style.left = (initialPieceX + dx) + 'px';
+        selectedPiece.style.top = (initialPieceY + dy) + 'px';
+    }
+}
+
+function stopDragging() {
+    if (selectedPiece) {
+        selectedPiece.classList.remove('dragging');
+        selectedPiece = null;
+    }
+}
+
+// 旋转功能
+var isRotating = false;
+var currentRotation = 0;
+
+function startRotating(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    isRotating = true;
+    var piece = this.closest('.piece-wrapper');
+    
+    // 获取当前旋转角度
+    var style = window.getComputedStyle(piece);
+    var matrix = new WebKitCSSMatrix(style.transform);
+    currentRotation = Math.atan2(matrix.b, matrix.a) * (180 / Math.PI);
+    
+    // 获取初始角度
+    var rect = piece.getBoundingClientRect();
+    var center = {
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2
+    };
+    var initialAngle = Math.atan2(
+        e.clientY - center.y,
+        e.clientX - center.x
+    ) * (180 / Math.PI);
+
+    function rotate(e) {
+        if (!isRotating) return;
+        
+        var angle = Math.atan2(
+            e.clientY - center.y,
+            e.clientX - center.x
+        ) * (180 / Math.PI);
+        
+        var newRotation = currentRotation + (angle - initialAngle);
+        piece.style.transform = 'rotate(' + newRotation + 'deg)';
+    }
+    
+    function stopRotating() {
+        isRotating = false;
+        document.removeEventListener('mousemove', rotate);
+        document.removeEventListener('mouseup', stopRotating);
+    }
+    
+    document.addEventListener('mousemove', rotate);
+    document.addEventListener('mouseup', stopRotating);
+}
+
+
+
+    // 2. 初始化代码
+    var starField = document.createElement('div');
+    starField.className = 'star-field';
+    introAnimation.appendChild(starField);
+
+    // 3. 滚动监听
+    pageContainer.addEventListener('scroll', function(e) {
+        if (infoPanel.classList.contains('open')) {
+            closePanel();
+        }
+        var scrollTop = pageContainer.scrollTop;
+    });
+
+    // 4. Animal Text 功能
+    function createCharacterSpan(char, index) {
+        var span = document.createElement('span');
+        span.textContent = char;
+        span.className = 'character';
+        
+        var randomX = Math.random() * 40 - 20;
+        var randomY = Math.random() * 40 - 20;
+        var randomRotation = Math.random() * 40 - 20;
+        
+        span.style.setProperty('--char-index', index);
+        span.style.setProperty('--x', randomX + 'px');
+        span.style.setProperty('--y', randomY + 'px');
+        span.style.setProperty('--rotation', randomRotation + 'deg');
+        
+        return span;
+    }
+
+    // 5. Panel 控制函数
+    function openPanel() {
+        infoPanel.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePanel() {
+        infoPanel.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function createMeteor() {
+        var meteor = document.createElement('div');
+        meteor.className = 'meteor';
+        
+        var startX = Math.random() * 3 + 2;
+        var angle = 45 + Math.random() * 10;
+        
+        meteor.style.left = startX + '%';
+        meteor.style.top = '0';
+        meteor.style.transform = 'rotate(' + angle + 'deg)';
+        
+        starField.appendChild(meteor);
+
+        meteor.animate([
+            { opacity: 0, transform: 'rotate(' + angle + 'deg) translateX(0)' },
+            { opacity: 1, transform: 'rotate(' + angle + 'deg) translateX(10px)', offset: 0.1 },
+            { opacity: 1, transform: 'rotate(' + angle + 'deg) translateX(100px)', offset: 0.4 },
+            { opacity: 0, transform: 'rotate(' + angle + 'deg) translateX(150px)' }
+        ], {
+            duration: 2000,
+            easing: 'ease-out'
+        }).onfinish = function() {
+            meteor.remove();
+        };
+    }
+
+    function randomMeteor() {
+        if(Math.random() < 0.3) {
+            createMeteor();
+        }
+    }
+
+    // 添加星星
+    for(var i = 0; i < 200; i++) {
+        var star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.opacity = Math.random() * 0.5 + 0.5;
+        starField.appendChild(star);
+    }
+
+    var meteorInterval = setInterval(randomMeteor, 1000);
+    // 7. 设置事件监听器
+    if (animalText) {
+        animalText.addEventListener('input', function(e) {
+            var selection = window.getSelection();
+            var range = selection.getRangeAt(0);
+            
+            var text = this.textContent;
+            this.innerHTML = '';
+            
+            text.split('').forEach(function(char, index) {
+                var span = createCharacterSpan(char, index);
+                this.appendChild(span);
+            }.bind(this));
+            
+            try {
+                var newRange = document.createRange();
+                newRange.setStart(this.childNodes[range.startOffset] || this.lastChild, 0);
+                newRange.collapse(true);
+                selection.removeAllRanges();
+                selection.addRange(newRange);
+            } catch (e) {
+                var range = document.createRange();
+                range.selectNodeContents(this);
+                range.collapse(false);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+        });
+
+        var initialText = 'BUILD YOUR ANIMAL HERE';
+        initialText.split('').forEach(function(char, index) {
+            animalText.appendChild(createCharacterSpan(char, index));
+        });
+    }
+
+    document.querySelector('.animal-section').addEventListener('mousemove', function(event) {
+        var rect = this.getBoundingClientRect();
+        var percentX = (event.clientX - rect.left) / rect.width;
+        var percentY = (event.clientY - rect.top) / rect.height;
+        var xAxis = Math.round(percentX * 200 - 100);
+        var yAxis = Math.round(percentY * -200 + 100);
+        
+        root.style.setProperty('--xopq', xAxis);
+        root.style.setProperty('--shap', yAxis);
+    });
+
+    // Story area interaction
+    storyArea.addEventListener('mousemove', function(e) {
+        var rect = storyArea.getBoundingClientRect();
+        var x = ((e.clientX - rect.left) / rect.width) * 100;
+        var y = ((e.clientY - rect.top) / rect.height) * 100;
+        
+        storyArea.style.setProperty('--mouse-x', x + '%');
+        storyArea.style.setProperty('--mouse-y', y + '%');
+    });
+
+    // Info panel interactions
+    infoToggle.addEventListener('click', openPanel);
+    closeButton.addEventListener('click', closePanel);
+    
+    infoPanel.addEventListener('click', function(e) {
+        if (e.target === infoPanel) {
+            closePanel();
+        }
+    });
+
+    infoPanel.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    infoPanel.addEventListener('touchmove', function(e) {
+        touchEndY = e.touches[0].clientY;
+        var deltaY = touchEndY - touchStartY;
+        if (deltaY > 100 && infoPanel.scrollTop <= 0) {
+            closePanel();
+        }
+    }, { passive: true });
+
+    // 8. 动画系统
+    function animate(timestamp) {
+        if (!startTime) startTime = timestamp;
+        var progress = (timestamp - startTime) % 5000;
+        var normalized = progress / 5000;
+
+        var thickness = Math.sin(normalized * Math.PI * 2) * 50 + 50;
+        var shape = currentMode === 'bothAxes' ? thickness : 0;
+
+        mainText.style.fontVariationSettings = '"xopq" ' + thickness + ', "SHAP" ' + shape;
+
+        if (!isPaused) {
+            animationFrame = requestAnimationFrame(animate);
+        }
+    }
+
+    // Control button events
+    controls.forEach(function(button) {
+        button.addEventListener('click', function() {
+            controls.forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+
+            if (button.dataset.mode === 'pause') {
+                isPaused = true;
+                cancelAnimationFrame(animationFrame);
+            } else {
+                currentMode = button.dataset.mode;
+                if (isPaused) {
+                    isPaused = false;
+                    startTime = null;
+                    animationFrame = requestAnimationFrame(animate);
+                }
+            }
+        });
+    });
+
+    // 9. Section transitions
+    function showFeatureSection(sectionType) {
+        console.log('Showing section:', sectionType);
+        if (infoToggle) {
+            infoToggle.style.visibility = 'hidden';
+        }
+        featuresContainer.classList.add('active');
+        backBtn.style.display = 'block';
+
+        document.querySelectorAll('.feature-section').forEach(function(section) {
+            if (section.classList.contains(sectionType + '-section')) {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        });
+
+        backBtn.classList.add('visible');
+    }
+
+    function handleBack() {
+    console.log('Handling back');
+    featuresContainer.classList.remove('active');
+    
+    document.querySelectorAll('.feature-section').forEach(function(section) {
+        section.style.display = 'none';
+    });
+    
+    setTimeout(function() {
+        pageContainer.scrollTop = scrollPosition;
+        if (infoToggle) {
+            infoToggle.style.visibility = 'visible';
+        }
+    }, 800);
+
+    backBtn.style.display = 'none';
+    backBtn.classList.remove('visible');
+}
+
+const storyText = document.querySelector('#story-text');
+
+// Function to randomize values
+function randomizeValues() {
+    // Generate random numbers between 0 and 100
+    const random1 = Math.round(Math.random() * 100);
+    const random2 = Math.round(Math.random() * 100);
+    
+    // Apply the values - the transition in CSS will make this smooth
+    storyText.style.fontVariationSettings = `"xopq" ${random1}, "SHAP" ${random2}`;
+}
+
+// Run the randomization every 500ms
+setInterval(randomizeValues, 500);
+
+// 直接在handleBack函数定义后添加事件监听
+backBtn.addEventListener('click', handleBack);
+
+// ESC 键支持
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && featuresContainer.classList.contains('active')) {
+        handleBack();
+    }
+});
+
+    // Card click handlers
+    playfulCards.forEach(function(card, index) {
+        card.addEventListener('click', function() {
+            scrollPosition = pageContainer.scrollTop;
+            var sections = ['story', 'animal', 'letter'];
+            showFeatureSection(sections[index]);
+        });
+    });
+
+    // 10. Cleanup and initialization
+    setTimeout(function() {
+        introAnimation.classList.add('fade-out');
+        pageContainer.classList.add('visible');
+        
+        setTimeout(function() {
+            introAnimation.remove();
+        }, 800);
+    }, 2500);
+
+    // Start animations
+    animationFrame = requestAnimationFrame(animate);
+    
+    // Set up intersection observer
+    var playfulSection = document.querySelector('.playful-section');
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '-10% 0px'
+    });
+    
+    observer.observe(playfulSection);
+
+    // Cleanup
+    window.addEventListener('beforeunload', function() {
+        cancelAnimationFrame(animationFrame);
+        clearInterval(meteorInterval);
+    });
+});
+
+
+
+
+    </script>
+</body>
+
+</html>
