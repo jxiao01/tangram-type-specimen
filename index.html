@@ -2509,7 +2509,6 @@
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. 所有变量声明放在最前面
     var root = document.querySelector(':root');
     var animalText = document.getElementById('animal-text');
     var storyArea = document.querySelector('.workspace-story');
@@ -2628,12 +2627,12 @@ function startRotating(e) {
     isRotating = true;
     var piece = this.closest('.piece-wrapper');
     
-    // 获取当前旋转角度
+    //
     var style = window.getComputedStyle(piece);
     var matrix = new WebKitCSSMatrix(style.transform);
     currentRotation = Math.atan2(matrix.b, matrix.a) * (180 / Math.PI);
     
-    // 获取初始角度
+    //
     var rect = piece.getBoundingClientRect();
     var center = {
         x: rect.left + rect.width / 2,
@@ -2668,12 +2667,12 @@ function startRotating(e) {
 
 
 
-    // 2. 初始化代码
+    //
     var starField = document.createElement('div');
     starField.className = 'star-field';
     introAnimation.appendChild(starField);
 
-    // 3. 滚动监听
+    //
     pageContainer.addEventListener('scroll', function(e) {
         if (infoPanel.classList.contains('open')) {
             closePanel();
@@ -2681,7 +2680,7 @@ function startRotating(e) {
         var scrollTop = pageContainer.scrollTop;
     });
 
-    // 4. Animal Text 功能
+    //
     function createCharacterSpan(char, index) {
         var span = document.createElement('span');
         span.textContent = char;
@@ -2699,7 +2698,7 @@ function startRotating(e) {
         return span;
     }
 
-    // 5. Panel 控制函数
+    //
     function openPanel() {
         infoPanel.classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -2742,7 +2741,7 @@ function startRotating(e) {
         }
     }
 
-    // 添加星星
+    //
     for(var i = 0; i < 200; i++) {
         var star = document.createElement('div');
         star.className = 'star';
@@ -2753,7 +2752,7 @@ function startRotating(e) {
     }
 
     var meteorInterval = setInterval(randomMeteor, 1000);
-    // 7. 设置事件监听器
+    //
     if (animalText) {
         animalText.addEventListener('input', function(e) {
             var selection = window.getSelection();
@@ -2799,7 +2798,6 @@ function startRotating(e) {
         root.style.setProperty('--shap', yAxis);
     });
 
-    // Story area interaction
     storyArea.addEventListener('mousemove', function(e) {
         var rect = storyArea.getBoundingClientRect();
         var x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -2809,7 +2807,6 @@ function startRotating(e) {
         storyArea.style.setProperty('--mouse-y', y + '%');
     });
 
-    // Info panel interactions
     infoToggle.addEventListener('click', openPanel);
     closeButton.addEventListener('click', closePanel);
     
@@ -2831,7 +2828,6 @@ function startRotating(e) {
         }
     }, { passive: true });
 
-    // 8. 动画系统
     function animate(timestamp) {
         if (!startTime) startTime = timestamp;
         var progress = (timestamp - startTime) % 5000;
@@ -2847,7 +2843,6 @@ function startRotating(e) {
         }
     }
 
-    // Control button events
     controls.forEach(function(button) {
         button.addEventListener('click', function() {
             controls.forEach(function(btn) {
@@ -2869,7 +2864,6 @@ function startRotating(e) {
         });
     });
 
-    // 9. Section transitions
     function showFeatureSection(sectionType) {
         console.log('Showing section:', sectionType);
         if (infoToggle) {
@@ -2920,20 +2914,18 @@ function randomizeValues() {
     storyText.style.fontVariationSettings = `"xopq" ${random1}, "SHAP" ${random2}`;
 }
 
-// Run the randomization every 500ms
+//
 setInterval(randomizeValues, 500);
 
-// 直接在handleBack函数定义后添加事件监听
+//
 backBtn.addEventListener('click', handleBack);
 
-// ESC 键支持
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && featuresContainer.classList.contains('active')) {
         handleBack();
     }
 });
 
-    // Card click handlers
     playfulCards.forEach(function(card, index) {
         card.addEventListener('click', function() {
             scrollPosition = pageContainer.scrollTop;
@@ -2942,7 +2934,6 @@ document.addEventListener('keydown', function(e) {
         });
     });
 
-    // 10. Cleanup and initialization
     setTimeout(function() {
         introAnimation.classList.add('fade-out');
         pageContainer.classList.add('visible');
@@ -2952,10 +2943,8 @@ document.addEventListener('keydown', function(e) {
         }, 800);
     }, 2500);
 
-    // Start animations
     animationFrame = requestAnimationFrame(animate);
     
-    // Set up intersection observer
     var playfulSection = document.querySelector('.playful-section');
     var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
@@ -2977,6 +2966,34 @@ document.addEventListener('keydown', function(e) {
         cancelAnimationFrame(animationFrame);
         clearInterval(meteorInterval);
     });
+});
+
+var editableText = document.querySelector('.editable-text');
+var mainText = document.getElementById('mainText');
+
+
+editableText.addEventListener('input', function() {
+
+    mainText.textContent = this.textContent;
+    
+
+    if (!this.textContent.trim()) {
+        mainText.textContent = 'TANGRAM';
+    }
+});
+
+
+editableText.addEventListener('focus', function() {
+    if (this.textContent === 'Type here') {
+        this.textContent = '';
+    }
+});
+
+editableText.addEventListener('blur', function() {
+    if (!this.textContent.trim()) {
+        this.textContent = 'Type here';
+        mainText.textContent = 'TANGRAM';
+    }
 });
 
 
