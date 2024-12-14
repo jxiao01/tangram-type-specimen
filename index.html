@@ -765,31 +765,6 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .editable-text {
-            width: 100%;
-            max-width: 600px;
-            min-height: 60px;
-            max-height: 200px;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            font-family: inherit;
-            font-size: 1.2rem;
-            outline: none;
-            resize: none;
-            overflow-y: auto;
-            transition: all 0.3s ease;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .editable-text:focus {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
         .animated-text {
             font-family: "TangramFont", sans-serif;
             font-size: clamp(4rem, 10vw, 8rem);
@@ -1893,7 +1868,7 @@
                         <div class="close-icon"></div>
                     </button>
                     <div class="info-section">
-                        <h2>SPECIMEN</h2>
+                        <h2>TANGRAM</h2>
                         <h3>About this typeface</h3>
                         <p>DO YOU STILL REMEMBER THE GAME FROM YOUR CHILDHOOD? Tangram — a puzzle full of childlike wonder, where simple geometric shapes come alive in endless combinations. This tangram-inspired typeface captures that same innocence and curiosity, turning each letter into a playful composition of triangles, squares, and parallelograms. It invites viewers back to a time when creativity felt boundless and imagination could transform basic shapes into anything. Through this font, I aim to bring out the purity and joy of childhood memories, blending simplicity with the limitless potential of playful design.</p>
                     </div>
@@ -1975,7 +1950,6 @@
                         </div>
 
                         <div class="type-container">
-                            <p class="editable-text" contenteditable="plaintext-only">Type here</p>
                             <div class="animated-text" id="mainText">TANGRAM</div>
                         </div>
                     </section>
@@ -2001,8 +1975,7 @@
                 <div class="playful-grid">
                     <div class="playful-card" data-section="story">
                         <div class="card-content">
-                            <h3>Make A Story</h3>
-                            <p>Transform shapes into characters and create your own narrative.</p>
+                            <h3>PLAYGROUND ONE</h3>
                             <div class="card-shape">
                                 <div class="shape-animation"></div>
                             </div>
@@ -2012,8 +1985,7 @@
 
                     <div class="playful-card" data-section="animal">
                         <div class="card-content">
-                            <h3>Build Animals</h3>
-                            <p>Combine pieces to create your favorite animals.</p>
+                            <h3>PLAYGROUND TWO</h3>
                             <div class="card-shape">
                                 <div class="shape1"></div>
                                 <div class="shape2"></div>
@@ -2024,8 +1996,7 @@
 
                     <div class="playful-card" data-section="letter">
                         <div class="card-content">
-                            <h3>Create Letters</h3>
-                            <p>Design your own typographic experiments.</p>
+                            <h3>PLAYGROUND THREE</h3>
                             <div class="card-shape">
                                 <div class="shape-animation"></div>
                             </div>
@@ -2191,8 +2162,7 @@
                         position: relative;
                         padding: 2rem;
                     }
-            
-                    /* 网格背景 */
+
                     .grid-system {
                         position: absolute;
                         top: 0;
@@ -2520,7 +2490,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var infoToggle = document.querySelector('.info-toggle');
     var closeButton = document.querySelector('.info-close');
     var mainText = document.getElementById('mainText');
-    var editableText = document.querySelector('.editable-text');
+
     var controls = document.querySelectorAll('.control-button');
     var featuresContainer = document.querySelector('.features-container');
     var backBtn = document.querySelector('.back-btn');
@@ -2584,11 +2554,11 @@ function startDragging(e) {
     selectedPiece = this;
     selectedPiece.classList.add('dragging');
     
-    // 记录鼠标初始位置
+    //
     initialMouseX = e.clientX;
     initialMouseY = e.clientY;
     
-    // 记录图形初始位置
+    //
     var computedStyle = window.getComputedStyle(selectedPiece);
     initialPieceX = parseInt(computedStyle.left, 10) || 0;
     initialPieceY = parseInt(computedStyle.top, 10) || 0;
@@ -2617,7 +2587,7 @@ function stopDragging() {
     }
 }
 
-// 旋转功能
+//
 var isRotating = false;
 var currentRotation = 0;
 
@@ -2968,33 +2938,9 @@ document.addEventListener('keydown', function(e) {
     });
 });
 
-var editableText = document.querySelector('.editable-text');
+
 var mainText = document.getElementById('mainText');
 
-
-editableText.addEventListener('input', function() {
-
-    mainText.textContent = this.textContent;
-    
-
-    if (!this.textContent.trim()) {
-        mainText.textContent = 'TANGRAM';
-    }
-});
-
-
-editableText.addEventListener('focus', function() {
-    if (this.textContent === 'Type here') {
-        this.textContent = '';
-    }
-});
-
-editableText.addEventListener('blur', function() {
-    if (!this.textContent.trim()) {
-        this.textContent = 'Type here';
-        mainText.textContent = 'TANGRAM';
-    }
-});
 
 
 
